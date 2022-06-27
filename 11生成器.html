@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //generator 函数 可以通过yield 关键字，将函数挂起，为了改变执行流提供了可能。同事为了做异步编程也提供了方案
+        // 与普通函数的曲边
+        // function 函数 函数名之前， 有个*
+        // 只能在函数内部使用yield 表达式， 让函数挂起
+        let arr = []
+        function* func(a){
+            yield 2;
+            yield 3;
+        }
+        let o = func();
+        console.log(o.next())
+        console.log(o.next())
+        console.log(o.next())
+
+        //总结 generator函数是分段执行的。 yield 语句是暂停执行，而next()是恢复执行
+
+        function* add(){
+            console.log("one")
+            let x = yield '2';
+            //x 并不是 yield 的返回值，而是 传入的实参
+            console.log('one' + x);
+            let y = yield '3'
+            console.log('two' + y);
+            return x+y;
+        }
+
+        // 使用场景：为不具备 interator 接口的对象提供了便利操作，
+        function* objectEntries(obj) {
+            // 获取对象所有的keys保存到数组中
+            const propKeys = Object.keys[obj]
+            for(const prokey of propKeys){
+                yield [prokey,obj[prokey]]
+            }
+        }
+        const obj = {
+            name:"小马哥",
+            age:18,
+        }
+        obj[Symbol.iterator] = objectEntries;
+        console.log(obj)
+        for(llet [k,v] of objectEntries(obj)){
+            console.log(`${k}:${v}`)
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //没有this绑定
+        //es5 中的this 指向 是取决于调用该函数的上下文对象
+        let PagHandle = {
+            id:123,
+            // init:function(){
+            //     document.addEventListener('click',function(e,){
+            //         this.doSomeThings(e.type)
+            //         //this 指向了 定义函数的上下文 
+            //         // console.log(this);
+            //     })
+            // },
+            // es6 写法
+            init:function(){
+                document.addEventListener('click',(e => {
+                    //this 指向了 当前对象， 值得调用这个函数的上一层作用域。
+                    this.doSomeThings(e.type)
+                }))
+            },
+            doSomeThings:function(type){
+                console.log(`时间类型：${type},当前的id${this.id}`);
+            }
+        }
+        PagHandle.init()
+        /*
+        *使用箭头函数需要主义的问题
+        * 1，箭头函数不能使用 arguments
+        * 2. 不能使用new 关键字实例化对象
+        * function 函数是一个对象，但是箭头函数不是一个对象，视为一个语法糖  对于一定内容的一定问题，会有更多的强度
+        */
+       
+    </script>
+</body>
+</html>

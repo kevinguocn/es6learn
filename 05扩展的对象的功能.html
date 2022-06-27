@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // es6 允许直接写入变量和函数作为对象的属性和方法
+        const name = 'xiaomage', age = 20;
+        const person = {
+            name,
+            age,
+            sayname(){}
+        }
+        let cart = {
+            wheel:4,
+            set(newVal){
+                if(newVal < this.wheel){
+                    throw new Error('输入错误');
+                }
+            },
+            get(){
+                return this.wheel
+            }
+        }
+        const obj = {};
+        obj.isShow = true;
+        obj['f'] = '123'; 
+
+        // 对象的方法
+        
+        // is() ====
+        //即比较值有比较数据类型
+        console.log(Object.is(NaN,NaN));
+
+        //assign()
+        // 浅拷贝，用于对象的合并
+        // 对象的属性合并 返回合并后的新兑现，浅拷贝，当前对象的新属性
+        // Object.assign(target, obj1,obj2)
+        let o = Object.assign({},{a:1},{b:2})
+        console.log(o);
+    </script>
+</body>
+</html>

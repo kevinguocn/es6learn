@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //set 集合类型
+        //表示 一个无重复值的有序列表
+        let set = new Set();
+        console.log(set);
+        //添加元素
+        set.add("123")
+        set.add(123)
+        set.add([1,2,3])
+        console.log(set);
+        //删除
+        set.delete('123')
+        console.log(set)
+        console.log(set.has(123))
+        // set.forEach((val,key)=>{
+        //     console.log(val,key)
+        // })
+
+        //将set 转换为数组
+        let set2 = new Set([1,2,3,4,444,5,5,5])
+        console.log(set2)
+        //通过扩展运算符
+        let arr = [...set2]
+        console.log(arr)
+
+
+        //set中对象的引用无法被释放
+        let set3 = new Set(),obj={}
+        set3.add(obj)
+        //释放当前的资源
+        obj = null
+        console.log(set3);
+
+        let set4 = new WeakSet(),obj3 = {}
+        set4.add(obj3)
+        console.log(set4);
+
+        //WeakSet的使用特点
+        //不能传入非对象类型的参数
+        //不可迭代 不能遍历
+        // 没有forEach
+        // 没有size 属性
+    </script>
+</body>
+</html>

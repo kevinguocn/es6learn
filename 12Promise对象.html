@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Promise 对象 异步编程的解决方案
+        // ES6 标准中 写入了Promise的异步
+        // 相当于一个容器，保存着一个还未结束，未来结束的事件
+        // 各种异步操作都可以用同样的方法 进行处理 axios 是一个 ajax库
+
+        //特点：
+        // 1. 对象的状态不受外界影响
+        // 2. 处理异步操作有三个状态 进行中 pending 进行中 resolved 成功返回的结果 rejected 失败返回的结果
+
+        let pro = new Promise(function(resolved,rejected){
+            //执行异步操作
+            let res = {
+                code:200,
+                data:{
+                    name:'xiaoming'
+                }
+            }
+            setTimeout(()=>{
+                if(res.code === 200){
+                    resolved(res)
+                }else{
+                    rejected(res)
+                }
+            },1000)
+
+        })
+        console.log(pro);
+        pro.then((val)=>{
+            console.log(val);
+        })
+
+        function timeOut(ms) {
+            return new Promise((resolved,rejected)=>{
+                setTimeout(() => {
+                    resolved('hello,promise  success')
+                }, ms);
+            })
+        }
+        timeOut(5000).then((val)=>{
+            console.log(val);
+        })
+
+        const getJSON = function(url){
+            return new Promise((resolved,rejected)=>{
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET',url);
+                xhr.onreadystatechange = handler;
+                xhr.responseType = 'JSON';
+                xhr.setRequestHeader("Accept","application/json")
+                xhr.send();
+                function handler(){
+                    // console.log(this.readyState);
+                    if(this.readyState === 4){
+                        if(this.status === 200){
+                            resolved(this.response);
+                        }else{
+                            rejected(new Error(this.statusText))
+                        }
+                    }
+                }
+            })
+        }
+
+        // 使用 promise 封装 ajax请求
+        // getJSON().then((data)=>{
+        //     console.log(data);
+        // },(error)=>{
+        //     console.log(error);
+        // });
+
+
+        // 使用then() 方法 
+        // then() 第一个参数是resolved 回调函数，第二个参数是 可选的rejected 回调函数
+
+        // .then() 方法 返回一个新的promise 实例方法， 可以采用链式编程
+
+        // resolve()  reject() all() race() done()  finally()
+
+        // let p = Promise.resolve('foo');
+        // 等价于
+        // let p = new Promise(resolved=>resolved("foo"));
+        // console.log(p);
+        // p.then((data)=>{
+        //     console.log(data);
+        // })
+
+
+        //all()
+        // let p1 = new Promise((resolve,reject) => {});
+        // let p2 = new Promise((resolve,reject) => {});
+        // let p3 = new Promise((resolve,reject) => {});
+        // let p4 = Promise.all([p1,p2,p3])
+        // p4.then(()=>{
+        //     // 三个都成功， 才成功
+        // }).catch(err=>{})
+        // 应用多个接口 都加载完成，才能执行下一步操作
+
+
+        //race()
+
+        // 请求超时的问题
+
+        //给某个异步请求设置超时的时间，并且在超时超时后来执行相应的操作
+        // 1 请求图片资源
+
+        function requestImg(imgSrc) {
+            return new Promise((resolve,reject)=>{
+                const img = new Image();
+                img.onload = function(){
+                    resolve(img);
+                }
+                img.src = imgSrc;
+            })
+             
+        }
+        
+        function timeout(){
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    reject('图片请求超时');
+                },3000)
+            })
+        }
+
+        Promise.race([requestImg('images/2.png'),timeout()]).then(res=>{}).catch(error=>{})
+
+        //done()  finally()
+
+        // 不管是否成功 都会做done 和 finally方法 
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

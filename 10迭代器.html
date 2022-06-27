@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //迭代器是一种Iterator
+        //两个核心
+        //1.迭代器是一个接口， 能快捷访问数据的一个接口
+        //2.通过symbol.iterator 来创建迭代器，通过迭代器的next方法来获取 迭代器的结果
+        // 可以把迭代器用于遍历数据结构的指针或者游标，
+        // 用于遍历数据结构的值
+        const items = ['one','two','three']
+        const ite = items[Symbol.iterator]();
+        console.log(ite);
+        console.log(ite.next())
+        //{value: 'one', done: false}
+        // done 表示遍历是否完成， true 表示遍历完成
+        console.log(ite.next().value)
+        console.log(ite.next().value)
+        //一个迭代器对应一个生成器
+    </script>
+</body>
+</html>

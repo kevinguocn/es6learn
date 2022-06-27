@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class类的用法</title>
+</head>
+<body>
+    <script>
+        // es5 造类
+        function Person(name,age){
+            this.name = name;
+            this.age = age;
+        }
+        Person.prototype.sayName = function(){
+            return this.name
+        }
+        let p1 = new Person('kevinguo',28)
+        // 通过 Object.assign 方法 一次性向类中添加 多个方法
+        Object.assign(Person.prototype,{
+            sayName(){
+                return this.name;
+            },
+            sayAge(){
+                return this.age;
+            }
+        })
+        class Person2{
+            constructor(name,age){
+                this.name = name;
+                this.age = age;
+
+            }
+
+            sayName(){
+                return this.name;
+            }
+
+            sayAge(){
+                return this.age;
+            }
+        }
+        let p2 = new Person2('hello',27);
+        console.log(p2);
+    </script>
+</body>
+</html>

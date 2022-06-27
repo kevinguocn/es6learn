@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //es6中提供的新数据类型 Symbol 表示独一无二的值，不可以使用new
+        const name = Symbol('name')
+        const name2 = Symbol('name')
+        console.log(name === name2)
+        // 一旦使用symbol是独一无二
+        // 最大用途：用的不多， 用来定义对象的私有变量,
+        // 使用symbol来设置变量， 用来取值时， 还是需要使用[]取值。
+        let s1 = Symbol('name');
+        let obj = {
+            [s1]:'小马哥'
+        }
+        console.log(obj[s1]);
+        
+    </script>
+</body>
+</html>

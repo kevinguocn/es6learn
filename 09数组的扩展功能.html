@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //entries keys values 返回一个遍历器
+        for(let index of ['a','b'].keys()){
+            console.log(index);
+        }
+        for(let val of ['a','b'].values()){
+
+        }
+        //对键值对的遍历
+        for (let [index,val] of ['a','b'].entries()){
+            console.log(index,val);
+        }
+        let letter = ['a','b','c']
+        let it = letter.entries();
+        console.log(it.next().value)
+        console.log(it.next().value)
+        console.log(it.next().value)
+        
+        //6.includes(） 返回一个布尔值，表示数组是否包含一个值
+        console.log([1,2,3].includes(2));
+        console.log([1,2,3].indexOf(1));
+    </script>
+</body>
+</html>
